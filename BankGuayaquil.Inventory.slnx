@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BankGuayaquil.Inventory.Application/BankGuayaquil.Inventory.Application.csproj" />
+    <Project Path="src/BankGuayaquil.Inventory.Domain/BankGuayaquil.Inventory.Domain.csproj" />
+    <Project Path="src/BankGuayaquil.Inventory.Infrastructure/BankGuayaquil.Inventory.Infrastructure.csproj" />
+    <Project Path="src/BankGuayaquil.Inventory.WebAPI/BankGuayaquil.Inventory.WebAPI.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BankGuayaquil.Inventory.Tests/BankGuayaquil.Inventory.Tests.csproj" />
+  </Folder>
+</Solution>
