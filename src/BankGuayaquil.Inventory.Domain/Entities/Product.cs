@@ -7,6 +7,8 @@ public class Product : AuditableEntity
     public string SKU { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+
+    public int MinStockThreshold { get; set; }
     
     // Relación Multiproveedor (N:M)
     public ICollection<ProductSupplier> Suppliers { get; set; } = new List<ProductSupplier>();

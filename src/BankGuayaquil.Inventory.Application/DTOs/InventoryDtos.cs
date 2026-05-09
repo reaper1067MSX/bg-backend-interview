@@ -17,6 +17,7 @@ public record ProductRequest(
     string SKU,
     string Name,
     string Description,
+    int? MinStockThreshold,
     List<ProductSupplierDto> Suppliers);
 
 public record ProductResponse(
@@ -25,6 +26,9 @@ public record ProductResponse(
     string Name,
     string Description,
     List<ProductSupplierDto> Suppliers,
+    int? MinStockThreshold,
     int TotalStock);
     
 public record UpdateStockRequest(int NewStock);
+
+public record UpdateMinThresholdStock(int NewMinThreshold);

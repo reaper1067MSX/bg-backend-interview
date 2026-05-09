@@ -62,5 +62,17 @@ public static class ProductEndpoints
                 ? Results.NotFound(result.Error) 
                 : Results.BadRequest(result.Error);
         }).RequireAuthorization(policy => policy.RequireRole("Admin"));
+        
+        group.MapPatch("/{productId:guid}/min-threshold",
+            async (Guid productId, [FromBody] UpdateMinThresholdStock request, IProductService productService) =>
+            {
+                var result = await productService.UpdateMinThresholdStockAsync(productId, request.NewMinThreshold);
+                if (result.IsSuccess) return Results.NoContent();
+                
+                return result.Error.Code == "Product.NotFound" 
+                    ? Results.NotFound(result.Error) 
+                    : Results.BadRequest(result.Error);
+            }).RequireAuthorization(policy => policy.RequireRole("Admin"));
+    
     }
 }

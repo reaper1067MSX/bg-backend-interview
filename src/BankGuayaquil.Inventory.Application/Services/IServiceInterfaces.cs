@@ -12,6 +12,7 @@ public interface IProductService
     Task<Result> UpdateProductAsync(Guid id, ProductRequest request);
     Task<Result> DeleteProductAsync(Guid id);
     Task<Result> UpdateStockAsync(Guid providerId, int newStock);
+    Task<Result> UpdateMinThresholdStockAsync(Guid productId, int newMinThreshold);
 }
 
 public interface ISupplierService

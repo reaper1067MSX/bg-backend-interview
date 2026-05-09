@@ -38,6 +38,7 @@ public class ProductService : IProductService
             SKU = request.SKU,
             Name = request.Name,
             Description = request.Description,
+            MinStockThreshold = request.MinStockThreshold ?? 10,
             Suppliers = request.Suppliers.Select(p => new ProductSupplier
             {
                 SupplierId = p.SupplierId,
@@ -129,12 +130,24 @@ public class ProductService : IProductService
         return Result.Success();
     }
 
+    public async Task<Result> UpdateMinThresholdStockAsync(Guid productId, int newMinThreshold)
+    {
+        var product = await _repository.GetByIdAsync(productId);
+        if (product == null) return Result.Failure(new Error("Product.NotFound", "Product not found"));
+        
+        product.MinStockThreshold = newMinThreshold;
+        await _unitOfWork.SaveChangesAsync(); 
+        
+        return Result.Success();
+    }
+
     private ProductResponse MapToResponse(Product p) => new(
         p.Id,
         p.SKU,
         p.Name,
         p.Description,
         p.Suppliers.Select(ps => new ProductSupplierDto(ps.Id, ps.SupplierId, ps.Supplier?.Name, ps.CurrentPrice, ps.Stock)).ToList(),
+        p.MinStockThreshold,
         p.Suppliers.Sum(ps => ps.Stock)
     );
 }
